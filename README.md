@@ -7,5 +7,7 @@
     * give the table CATEGORIES and created the following records (uuid is autoincremented); name = dog, name = cat, name = reptile, name = fish, name = bird, name = smallMammal
 
     * give the table PRODUCTS some records. For the img_url the only image that will work is /images/stock.jpeg. The category id will be only one of the following {cat, dog, reptile, fish, bird, smallMammal}  
+
+* To create a database with some pregenerated data use the database2.db.sql to create your database.
 * run node start
 * connect at localhost:8080 or localhost:8080/ or localhost:8080/home
