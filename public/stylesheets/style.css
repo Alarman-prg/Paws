@@ -26,6 +26,13 @@ html {
     margin: 0;
 }
 
+a:visited,
+a:link,
+a:hover,
+a:active {
+    color: green;
+}
+
 div.heading {
     display: flex;
     flex-flow: row wrap;
@@ -34,6 +41,7 @@ div.heading {
     padding-left: 0;
     align-items: center;
     justify-content: space-around;
+    border-bottom: green 5px solid;
 }
 
 div.heading form {
@@ -56,12 +64,8 @@ div.heading a {
     text-decoration: none;
 }
 
-div.heading a:hover {
-    color: #0047ff;
-}
-
 div.body-container {
-    height: auto;
+    height: 90em;
     width: 100%;
     display: flex;
 }
@@ -114,6 +118,7 @@ div.main-body div.card p {
 }
 
 div.footer {
+    padding-top: 3em;
     display: flex;
     flex-flow: row wrap;
 }
@@ -193,22 +198,23 @@ img.item-detail-thumbnail {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
+    align-items: flex-start;
     margin: 0px;
     padding: 0px;
-    min-height: 700px;
-    border: 10px solid black;
+    padding-top: 5em;
+    min-height: 40em;
 }
 
 .cart-display-container {
-    display: flex;  
+    display: flex;
     flex: .9;
     flex-flow: column nowrap;
     justify-content: center;
-    
+
 }
 
 .cart-display-container h1 {
-    text-align:left;
+    text-align: left;
     font-size: 50px;
     margin: 25px;
 }
@@ -218,8 +224,8 @@ img.item-detail-thumbnail {
     width: 500px;
     margin: 25px;
     flex-flow: row nowrap;
-    justify-content:space-around;
-    border:1px solid black;
+    justify-content: space-around;
+    border: 1px solid black;
 }
 
 .cart-item img {
@@ -227,91 +233,43 @@ img.item-detail-thumbnail {
 }
 
 .total-display-container {
-    display: flex;  
+    display: flex;
     flex-flow: column nowrap;
     justify-content: center;
+    align-items: flex;
+    padding-right: 10%;
 }
 
+body#admin {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
+#sidebar {
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: #fff;
+    float: left;
+}
 
+#content {
+    margin-left: 250px;
+    padding: 20px;
+}
 
+#header {
+    background-color: #444;
+    color: #fff;
+    padding: 10px;
+}
 
+.sidebar-item {
+    padding: 10px;
+    border-bottom: 1px solid #555;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        body#admin {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        #sidebar {
-            width: 250px;
-            height: 100%;
-            background-color: #333;
-            color: #fff;
-            float: left;
-        }
-        #content {
-            margin-left: 250px;
-            padding: 20px;
-        }
-        #header {
-            background-color: #444;
-            color: #fff;
-            padding: 10px;
-        }
-        .sidebar-item {
-            padding: 10px;
-            border-bottom: 1px solid #555;
-        }
-        .sidebar-item:hover {
-            background-color: #555;
-        }
-    
+.sidebar-item:hover {
+    background-color: #555;
+}

@@ -38,7 +38,7 @@ let SERVER_ERROR_MSG = 'Something went wrong on the server.'
 
 async function getDbConnection() {
     const db = await sqlite.open({
-        filename : 'database2.db',
+        filename : 'db.db',
         driver: sqlite3.Database
     });
 
@@ -84,7 +84,6 @@ app.get("/products/:name", async function (req, res) {
 app.get('/detail', function(req, res) {
     const itemString = req.query.item;
     const item = JSON.parse(decodeURIComponent(itemString));
-    // Now you can use the 'item' object as needed
     res.render('detail', { item: item });
 });
 
