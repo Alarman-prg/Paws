@@ -53,6 +53,10 @@ app.get('/home', (req, res) => {
     res.render("home");
 })
 
+app.get('/login', (req, res) => {
+    res.render("login")
+})
+
 app.get("/products",  (req, res) => {
     res.redirect("/products/all")
 })
