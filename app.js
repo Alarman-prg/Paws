@@ -222,6 +222,10 @@ app.get('/chuck', async (req, res) => {
   });
 
 
+  app.get("/social", (req, res) => {
+    res.render("social");
+  })
+
 const PORT_DEF = process.env.PORT || 8080;
 console.log("Listening on " + PORT_DEF);
 app.listen(PORT_DEF)
