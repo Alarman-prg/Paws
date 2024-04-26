@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+
+    <link rel="stylesheet" href="stylesheets/style.css">
 </head>
-<body>
-    <form action="/user" method="post">
-        <label for="username">Username: </label>
-        <input type="text" name="username" id="username">
-        
-        <label for="password">Password: </label>
-        <input type="text" name="password" id="password">
-    </form>
+
+<body class="wallpaper">
+    <div class="login">
+        <h1>Log in</h1>
+        <form class="form-container" action="/login" method="post">
+            <label for="username">Username: </label>
+            <input type="text" name="username" id="username">
+            <br>
+            <label for="password">Password:</label>
+            <input type="text" name="password" id="password">
+            <br>
+            <button type="submit">Log in.</button>
+        </form>
+    </div>
 </body>
+
 </html>
