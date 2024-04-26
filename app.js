@@ -77,7 +77,6 @@ app.get("/products/:name", async function (req, res) {
     } catch (err) {
         console.log("Error:", err);
         console.log(qry);
-        // Handle error gracefully, maybe send an error response
         res.status(500).send("Internal Server Error");
     }
 })
@@ -98,7 +97,6 @@ app.get("detail/:name", async function(req, res) {
     } catch (error) {
         console.log("Error:", err);
         console.log(qry);
-        // Handle error gracefully, maybe send an error response
         res.status(500).send("Internal Server Error");
     }
 })
