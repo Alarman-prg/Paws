@@ -1,6 +1,7 @@
 'use strict'
 const express = require("express")
 const app = express()
+const axios = require('axios');
 
 const staticOptions = {
     dotfiles: "deny",
@@ -115,9 +116,7 @@ app.get("/products/:name", async function (req, res) {
         let menu = await db.all(qry, req.params.name);
         res.render('selected_products', { item: menu });
     } catch (err) {
-        console.log("Error:", err);
-        console.log(qry);
-        res.status(500).send(SERVER_ERROR_MSG);
+        res.status(SERVER_ERROR).send(SERVER_ERROR_MSG);
     }
 })
 
@@ -170,7 +169,7 @@ app.get("/cart", async function (req, res) {
         const db = await getDbConnection();
 
 
-        // stupid sql
+        // 10 hrs to figure this out
         // https://www.sqlite.org/docs.html praise god
         // assume: p is products table, cp is cartProducts table in db
         // From the active user a uuid is matched with the cart owner_id which is matched with the cartProducts cart_id then returns the name, price, and qty of each product in the active users cart. 
@@ -197,6 +196,30 @@ app.get("/cart", async function (req, res) {
 app.post("/clear-cart", async function (req, res) {
     
 })
+
+app.get('/chuck', async (req, res) => {
+    try {
+      const query = req.query.q || "fight"; // Use query parameter 'q' for the search query
+      const options = {
+        method: 'GET',
+        url: 'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random',
+        params: {
+          query: query
+        },
+        headers: {
+          accept: 'application/json',
+          'X-RapidAPI-Key': 'f19a715697msh8dfdab4b71c8f97p19d88fjsn41814e5a31c7', // Replace with your RapidAPI key
+          'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
+        }
+      };
+      
+      const response = await axios.request(options);
+      console.log(response)
+    res.render("chuck", {data: response.data});
+    } catch (error) {
+      res.status(SERVER_ERROR).send(SERVER_ERROR_MSG);
+    }
+  });
 
 
 const PORT_DEF = process.env.PORT || 8080;
