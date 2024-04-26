@@ -13,8 +13,12 @@ form {
     color: #1e1e1e;
 }
 
+div {
+    border-radius: 20px;
+}
+
 p {
-    padding:2px;
+    padding: 2px;
     font-size: 20px;
 }
 
@@ -23,10 +27,10 @@ p {
     background-size: cover;
     background-position: center;
     font-family: 'Clash Display', sans-serif;
-    height: 100vh; 
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    color: white; 
+    color: white;
 
 }
 
@@ -47,21 +51,35 @@ div.login {
     margin-right: -50%;
     transform: translate(-50%, -50%);
     min-width: 10em;
-    background-color: color(srgb red green blue)
+    gap: 10px;
 }
+
 div.login form {
     text-align: center;
+}
+
+div.login form button {
+    align-items: end;
+    align-content: end;
+}
+
+.form-container {
+    border-radius: 20px;
+    padding: 5em;
+    background-color: white;
 }
 
 div.heading {
     display: flex;
     flex-flow: row wrap;
-    padding: 1em;
-    margin-left: 0;
-    padding-left: 0;
+    background-color: white;
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-bottom: 1em;
+    
     align-items: center;
     justify-content: space-around;
-    
+
 }
 
 div.heading form {
@@ -94,9 +112,9 @@ div.body-container {
 }
 
 div.drilldown {
-    background-color: #e0e0e0;
-    height: 575px;
-    margin-left: 20px;
+    background-color: white;
+    height: 600px;
+    margin-left: 5em;
     padding-right: 40px;
 }
 
@@ -114,11 +132,11 @@ div.drilldown p#drilldown-title {
 
 div.main-body {
     flex: 1;
-    height: 100%;
+    /* height: 100%; */
     padding: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    background-color: #e0e0e0;
+    margin-left: 5em;
+    margin-right: 5em;
+    background-color: white;
 }
 
 div.main-body div.card {
@@ -144,6 +162,13 @@ div.footer {
     padding-top: 3em;
     display: flex;
     flex-flow: row wrap;
+    background-color: white;
+    text-align: baseline;
+    padding: 0;
+    
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-top: 1em;
 }
 
 div.footer p#copyright {
@@ -156,9 +181,6 @@ div.footer a {
     flex: 1;
 }
 
-
-
-/* product.html specific */
 div.item-display-container {
     display: flex;
     flex-flow: row wrap;
@@ -168,7 +190,9 @@ div.item-display-container {
 }
 
 div.item-display-container div.item {
-    border: solid;
+    border: solid black;
+    text-align: center;
+    width: 25%;
     margin: 10px;
     padding: 10px;
 }
@@ -183,11 +207,10 @@ div.item-display-container div.item a.item-name {
 }
 
 div.item-display-container div.item .item-price {
-    text-align: left;
-    color: #0047ff;
+    text-align: center;
+    color: #597cd4;
 }
 
-/* detail.hmtl specific */
 .main-body .detail-body {
     height: auto;
     display: flex;
@@ -216,16 +239,16 @@ img.item-detail-thumbnail {
     flex: 1;
 }
 
-/*BEGIN CART CSS*/
 .cart-main-body {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
     align-items: flex-start;
-    margin: 0px;
-    padding: 0px;
+    margin: 5em;
+    padding: 5em;
     padding-top: 5em;
     min-height: 40em;
+    background-color: white;
 }
 
 .cart-display-container {
@@ -295,4 +318,15 @@ body#admin {
 
 .sidebar-item:hover {
     background-color: #555;
+}
+
+div.contact-container {
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: white;
+    margin-left: 5em;
+    margin-right: 5em;
+    padding-left: 5em;
+    padding-right: 5em;
+    min-height: 50em;
 }

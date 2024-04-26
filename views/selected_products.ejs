@@ -10,7 +10,7 @@
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="wallpaper">
     <!-- Heading/Search/Account/Cart -->
     <div class="heading">
         <p id="title"><a href="/home">Paw Prints</a></p>
@@ -54,13 +54,12 @@
 
         <!-- Main body -->
         <div class="main-body">
-            <p id="result-display">Showing results for </p>
             <div class="item-display-container">
                 <% item.forEach(function(item) { %>
                     <div class="item">
-                        <a href="/detail?item=<%= encodeURIComponent(JSON.stringify(item)) %>" class="item-name"><p>Item Name: <%= item.name %> </p></a>
-
-                        <p class="item-price">Item Price:<%= item.price %></p>
+                        <img class="item-thumbnail" src="<%= item.img_url %>" alt="item-thumbnail">
+                        <a href="/detail?item=<%= encodeURIComponent(JSON.stringify(item)) %>" class="item-name"><p><%= item.name %> </p></a>
+                        <p class="item-price">Item Price:&nbsp;&nbsp; <%= item.price %></p>
                     </div>
                 <% }); %>    
             </div>

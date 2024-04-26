@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail</title>
 
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="wallpaper">
     <!-- Heading/Search/Account/Cart -->
     <div class="heading">
         <p id="title"><a href="/home">Paw Prints</a></p>
@@ -57,35 +57,37 @@
         <div class="main-body">
             <div class="detail-body">
                 <div class="detail-sub-left">
-                    <h1 id="item-detail-name">Product name: <%= item.name %></h1>
+                    <h1 id="item-detail-name">Product name: <%= item.name %>
+                    </h1>
                     <img class="item-detail-thumbnail" src="<%= item.img_url %>" alt="item-detail-thumbnail">
                 </div>
                 <div class="detail-sub-right">
 
-                    
 
-                    <p id="item-detail-desc">Description : <%= item.desc %></p>
-                    <p id="item-detail-price">Price : $<%= item.price %></p>
-                    <form action="" method="post">
-                        <label for=""></label>
-                        <input type="number" name="qty" id="qty" style="width: 50px;">
-                        <input type="reset" value="Reset">
-                        <input type="submit" value="Add to cart" style="width: 100px;">
+
+                    <p id="item-detail-desc">Description : <%= item.desc %>
+                    </p>
+                    <p id="item-detail-price">Price : $<%= item.price %>
+                    </p>
+
+                    <form action="/add" method="post">
+                        <input type="hidden" name="productId" value="<%= item.uuid %>">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+                        <button type="submit">Add to Cart</button>
                     </form>
                 </div>
             </div>
-            
-            
         </div>
     </div>
 
 
     <!-- Footer/Copyright -->
     <div class="footer">
-        <a href="index.html">
+        <a href="/home">
             <p>Socials</p>
         </a>
-        <a href="admin.html">
+        <a href="/admin">
             <p>Admin Pages</p>
         </a>
         <p id="copyright">Copyright @2024</p>

@@ -61,16 +61,20 @@ app.get("/login", (req, res) => {
 app.post("/login", async function (req, res) {
     const username = req.body.username;
     const password = req.body.password;
-    let db = await getDbConnection();
+
     try {
-        db.get("SELECT * FROM users WHERE username = ? AND password = ?", [username, password]);
+        let db = await getDbConnection();
+        db.get("SELECT * FROM users WHERE username = ? AND password = ?;", [username, password]);
         let active = 1;
-        db.run("UPDATE users SET active = ? WHERE username = ?", [active, username])
-    } catch (error) {
+        db.run("UPDATE users SET active = ? WHERE username = ?;", [active, username])
+
+    } catch (err) {
+        // not implemented
         if (!row) {
             return res.status(401).send(SERVER_ERROR_MSG);
         }
-        return res.status(500).send(SERVER_ERROR_MSG);
+        res.status(404).send(SERVER_ERROR_MSG);
+        res.redirect("/login")
     }
     res.redirect("/home");
 })
@@ -82,10 +86,11 @@ app.get("/logout", (req, res) => {
 app.post("/logout", async function (req, res) {
     try {
         let db = await getDbConnection();
-
+        db.run("UPDATE users set active = 0 WHERE active = 1;")
     } catch (error) {
         return res.status(401).send(SERVER_ERROR_MSG);
     }
+    res.redirect("/login")
 })
 
 app.get("/products", (req, res) => {
@@ -135,6 +140,22 @@ app.get("detail/:name", async function (req, res) {
     }
 })
 
+app.post("/add",  async function (req, res) {
+    try {
+        const { productId, quantity } = req.body;
+        const db = await getDbConnection();
+
+        await db.run(
+            "INSERT INTO cartProducts (cart_id, product_id, qty) VALUES ((SELECT uuid FROM carts WHERE owner_id = (SELECT uuid FROM users WHERE active = 1)), ?, ?)",
+            [productId, quantity]
+        );
+
+        res.redirect("/cart");
+    } catch (error) {
+        res.status(500).send(SERVER_ERROR_MSG);
+    }
+});
+
 
 app.get("/admin", (req, res) => {
     res.render("admin")
@@ -144,8 +165,37 @@ app.get("/contact", (req, res) => {
     res.render("contact")
 })
 
-app.get("/cart", (req, res) => {
-    res.render("cart")
+app.get("/cart", async function (req, res) {
+    try {
+        const db = await getDbConnection();
+
+
+        // stupid sql
+        // https://www.sqlite.org/docs.html praise god
+        // assume: p is products table, cp is cartProducts table in db
+        // From the active user a uuid is matched with the cart owner_id which is matched with the cartProducts cart_id then returns the name, price, and qty of each product in the active users cart. 
+
+        const cartItems = await db.all(
+            "SELECT p.name, p.price, cp.qty FROM cartProducts AS cp INNER JOIN products AS p ON cp.product_id = p.uuid WHERE cp.cart_id = (SELECT uuid FROM carts WHERE owner_id = (SELECT uuid FROM users WHERE active = 1))"
+        );
+
+        let subtotal = 0;
+        cartItems.forEach(item => {
+            subtotal += item.price * item.qty;
+        });
+
+        // taxes, just doing 10% 
+        const taxes = subtotal * 0.1;
+        const grandTotal = subtotal + taxes;
+
+        res.render("cart", { cartItems, subtotal, taxes, grandTotal });
+    } catch (error) {
+        res.status(500).send(SERVER_ERROR_MSG);
+    }
+});
+
+app.post("/clear-cart", async function (req, res) {
+    
 })
 
 
