@@ -1,13 +1,11 @@
 # Paws!
 
-## To run this project
+## What is this project?
+This project is for CSC 300 at UNCG. It is a semester long development page. This page evolved as the class when on with many milestones. My project in particular is a shopping website for everything to do with pet supplies. The main components/frameworks of this project are npm/node.js, express, sqlite, and axios for an API integration.
+
+### To run this project?
 * Get a local copy onto your machine from github.
-* Create a database using db_create.sql (this is an empty database)
-    * You will want to name it database2 if you don't want to change the name in app.js, line 41.
-    * give the table CATEGORIES and created the following records (uuid is autoincremented); name = dog, name = cat, name = reptile, name = fish, name = bird, name = smallMammal
-
-    * give the table PRODUCTS some records. For the img_url the only image that will work is /images/stock.jpeg. The category id will be only one of the following {cat, dog, reptile, fish, bird, smallMammal}  
-
-* To create a database with some pregenerated data use the database2.db.sql to create your database.
-* run node start
-* connect at localhost:8080 or localhost:8080/ or localhost:8080/home
+* npm install
+* Import build_db.sql into db browser (SQLite) and name the database, db.
+* run nodemon start
+* connect at localhost:8080

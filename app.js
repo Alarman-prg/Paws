@@ -49,15 +49,15 @@ async function getDbConnection() {
 // default view
 app.get("/", (req, res) => {
     res.redirect("/login")
-})
+});
 
 app.get("/home", (req, res) => {
     res.render("home");
-})
+});
 
 app.get("/login", (req, res) => {
     res.render("login")
-})
+});
 
 app.post("/login", async function (req, res) {
     const username = req.body.username;
@@ -78,11 +78,11 @@ app.post("/login", async function (req, res) {
         res.redirect("/login")
     }
     res.redirect("/home");
-})
+});
 
 app.get("/logout", (req, res) => {
     res.render("logout")
-})
+});
 
 app.post("/logout", async function (req, res) {
     try {
@@ -96,7 +96,7 @@ app.post("/logout", async function (req, res) {
 
 app.get("/products", (req, res) => {
     res.redirect("/products/all")
-})
+});
 
 app.get("/products/all", async function (req, res) {
     let qry = 'SELECT * FROM products;';
@@ -107,7 +107,7 @@ app.get("/products/all", async function (req, res) {
     } catch (error) {
         res.status(SERVER_ERROR).send(SERVER_ERROR_MSG);
     }
-})
+});
 
 app.get("/products/:name", async function (req, res) {
     let qry = 'SELECT * FROM products WHERE category_id = ?;';
@@ -118,7 +118,7 @@ app.get("/products/:name", async function (req, res) {
     } catch (err) {
         res.status(SERVER_ERROR).send(SERVER_ERROR_MSG);
     }
-})
+});
 
 app.get("/detail", function (req, res) {
     const itemString = req.query.item;
@@ -137,9 +137,9 @@ app.get("detail/:name", async function (req, res) {
         console.log(qry);
         res.status(500).send(SERVER_ERROR_MSG);
     }
-})
+});
 
-app.post("/add",  async function (req, res) {
+app.post("/add", async function (req, res) {
     try {
         const { productId, quantity } = req.body;
         const db = await getDbConnection();
@@ -155,15 +155,6 @@ app.post("/add",  async function (req, res) {
     }
 });
 
-
-app.get("/admin", (req, res) => {
-    res.render("admin")
-})
-
-app.get("/contact", (req, res) => {
-    res.render("contact")
-})
-
 app.get("/cart", async function (req, res) {
     try {
         const db = await getDbConnection();
@@ -172,7 +163,7 @@ app.get("/cart", async function (req, res) {
         // 10 hrs to figure this out
         // https://www.sqlite.org/docs.html praise god
         // assume: p is products table, cp is cartProducts table in db
-        // From the active user a uuid is matched with the cart owner_id which is matched with the cartProducts cart_id then returns the name, price, and qty of each product in the active users cart. 
+        // From the table USER an active user is matched, by a uuid, with the cart owner_id which is matched with the cartProducts cart_id then returns the name, price, and qty of each product in the active users cart. 
 
         const cartItems = await db.all(
             "SELECT p.name, p.price, cp.qty FROM cartProducts AS cp INNER JOIN products AS p ON cp.product_id = p.uuid WHERE cp.cart_id = (SELECT uuid FROM carts WHERE owner_id = (SELECT uuid FROM users WHERE active = 1))"
@@ -187,44 +178,48 @@ app.get("/cart", async function (req, res) {
         const taxes = subtotal * 0.1;
         const grandTotal = subtotal + taxes;
 
-        res.render("cart", { cartItems, subtotal, taxes, grandTotal });
+        res.render("cart", { cartItems, subtotal, taxes, grandTotal }); // ejs stuff
     } catch (error) {
         res.status(500).send(SERVER_ERROR_MSG);
     }
 });
 
-app.post("/clear-cart", async function (req, res) {
-    
-})
-
 app.get('/chuck', async (req, res) => {
     try {
-      const query = req.query.q || "fight"; // Use query parameter 'q' for the search query
-      const options = {
-        method: 'GET',
-        url: 'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random',
-        params: {
-          query: query
-        },
-        headers: {
-          accept: 'application/json',
-          'X-RapidAPI-Key': 'f19a715697msh8dfdab4b71c8f97p19d88fjsn41814e5a31c7', // Replace with your RapidAPI key
-          'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
-        }
-      };
-      
-      const response = await axios.request(options);
-      console.log(response)
-    res.render("chuck", {data: response.data});
+        const query = req.query.q || "chocolate"; // Use query parameter 'q' for the search query
+        const options = {
+            method: 'GET',
+            url: 'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random',
+            params: {
+                query: query
+            },
+            headers: {
+                accept: 'application/json',
+                'X-RapidAPI-Key': 'f19a715697msh8dfdab4b71c8f97p19d88fjsn41814e5a31c7', // Replace with your RapidAPI key
+                'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
+            }
+        };
+
+        const response = await axios.request(options);
+        console.log(response)
+        res.render("chuck", { data: response.data });
     } catch (error) {
-      res.status(SERVER_ERROR).send(SERVER_ERROR_MSG);
+        res.status(SERVER_ERROR).send(SERVER_ERROR_MSG);
     }
-  });
+});
 
 
-  app.get("/social", (req, res) => {
+app.get("/social", (req, res) => {
     res.render("social");
-  })
+})
+
+app.get("/admin", (req, res) => {
+    res.render("admin")
+})
+
+app.get("/contact", (req, res) => {
+    res.render("contact")
+})
 
 const PORT_DEF = process.env.PORT || 8080;
 console.log("Listening on " + PORT_DEF);
