@@ -53,7 +53,7 @@ INSERT INTO "categories" VALUES (6,'smallMammal');
 INSERT INTO "products" VALUES (1,'Squeaky Dog Toy','Squeaky dog toy that is indestructable!','/images/stock.jpeg','dog',1);
 INSERT INTO "products" VALUES (2,'Cat Food','Highest quality food for your feline fmaily member','/images/cat-food.jpg','cat',2);
 INSERT INTO "products" VALUES (3,'Dog Food','Highest quality food for your furry companion!','/images/dog-food.jpg','dog',3);
-INSERT INTO "products" VALUES (4,'Dog Collar','For long walks or small adventures, this will help keep the peace.','/images/dog_collar.jpg','dog',4);
+INSERT INTO "products" VALUES (4,'Dog Collar','For long walks or small adventures, this will help keep the peace.','/images/dog-collar.jpg','dog',4);
 INSERT INTO "products" VALUES (5,'Dog Treats','Made from the purest ingredients, these treats will give your pup clean teeth!','/images/dog-treats.jpg','dog',5);
 INSERT INTO "products" VALUES (6,'Reptile Filler Product','DESCRIPTION','/images/none.svg','reptile',6);
 INSERT INTO "products" VALUES (7,'Fish Filler Product','DESCRIPTION','/images/none.svg','fish',7);
